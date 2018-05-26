@@ -12,6 +12,8 @@ use Ben\DoctorsBundle\Form\ConsultationType;
 use Ben\DoctorsBundle\Entity\Person;
 use Ben\DoctorsBundle\Pagination\Paginator;
 
+use BG\BarcodeBundle\Util\Base1DBarcode as barCode;
+
 
 /**
  * Consultation controller.
@@ -115,7 +117,6 @@ class ConsultationController extends Controller
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Consultation entity.');
         }
-
         $deleteForm = $this->createDeleteForm($id);
 
         return $this->render('BenDoctorsBundle:Consultation:show.html.twig', array(
@@ -260,15 +261,28 @@ class ConsultationController extends Controller
         $entity = $em->getRepository('BenDoctorsBundle:Consultation')->find($id);
 
         $snappy = $this->get('knp_snappy.pdf');
-
+        $myBarcode = new barCode();
+        //$bcPathAbs = $myBarcode->getBarcodePNGPath('501234567890', 'EAN13', 1.75, 45);
+        $ena13 = substr ($entity->getId().''.$entity->getUser()->getId().''.$entity->getCreated()->getTimestamp().''.$entity->getPerson()->getId(),0,13);
+        if(!is_numeric($ena13) || strlen($ena13) != 13)
+            $ena13 = '501234567890';
+        $bcHTMLRaw = $myBarcode->getBarcodeHTML('501234567890', 'EAN13', 1.75, 45);
         $html = $this->renderView('BenDoctorsBundle:Consultation:consultaion.html.twig', array(
-            'entity'      => $entity,
+             'entity'      => $entity,
+              'barcodeHTML' => $bcHTMLRaw,
         ));
         //$pageUrl = $this->generateUrl('homepage', array(), true); // use absolute path!
+        /*return $this->render('BenDoctorsBundle:Consultation:consultaion.html.twig', array(
+            'entity'      => $entity,
+            'barcodeHTML' => $bcHTMLRaw,
+        ));*/
         $filename = 'ord_'.$id;
 
         return new Response(
-            $snappy->getOutputFromHtml($html),
+            $snappy->getOutputFromHtml($html, array(
+                'page-height' => 64 * 3,
+                'page-width'  => 52 * 3,
+            )),
             200,
             array(
                 'Content-Type'          => 'application/pdf',

@@ -21,8 +21,17 @@ class userType extends AbstractType
         $builder
             ->add('family_name')
             ->add('first_name')
+            ->add('matricule')
+            //->add('speciality' , new \Ben\DoctorsBundle\Form\SpecialityType())
+            ->add('speciality', 'entity', array(
+                'class' => 'BenDoctorsBundle:Speciality',
+                'property' => 'name',
+                'multiple' => false,
+                'expanded' => false
+            ))
             ->add('tel')
             ->add('contry')
+            ->add('postal')
             ->add('city')
             ->add('address')
             ->add('image' , new \Ben\DoctorsBundle\Form\imageType())

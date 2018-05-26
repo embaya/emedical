@@ -6,7 +6,7 @@ Tableau de bord | {{ parent() }}
 <h3><span class="glyphicon glyphicon-file"></span> Mettre à jour une consultation</h3>
 <form action="{{ path('consultation_update', { 'id': entity.id }) }}"  class="form-horizontal col-md-8" method="post">
     <div class="form-group ">
-        <label class="col-md-6 control-label" for="user">Etudiant</label>
+        <label class="col-md-6 control-label" for="user">Patient</label>
         <div class="col-md-6">
             <input id="user" class="form-control disabled" disabled="disabled" type="text" name="unused" value="{{ entity.person.fullName }}">
         </div>

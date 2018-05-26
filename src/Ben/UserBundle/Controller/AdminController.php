@@ -100,10 +100,10 @@ class AdminController extends Controller
         $form = $this->createForm(new userType(), $user);
         $form->bind($request);
         /* check if user has admin role */
-        if (in_array('ROLE_ADMIN', $user->getRoles())){
+        /*if (in_array('ROLE_ADMIN', $user->getRoles())){
             $this->get('session')->getFlashBag()->add('danger', "impossible de modifier les informations d'un administrateur de cette interface");
             return $this->redirect($this->generateUrl('ben_users'));
-        }
+        }*/
         if ($form->isValid()) {
             $em->updateUser($user, false);
             $user->getImage()->manualRemove($user->getImage()->getAbsolutePath());

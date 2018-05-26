@@ -21,6 +21,13 @@ class User extends BaseUser{
     protected $id;
 
     /**
+     * @var string $matricule
+     *
+     * @ORM\Column(name="matricule", type="string", length=45, nullable=true)
+     */
+    private $matricule;
+
+    /**
      * @var string $family_name
      *
      * @ORM\Column(name="family_name", type="string", length=255, nullable=true)
@@ -40,6 +47,13 @@ class User extends BaseUser{
      * @ORM\Column(name="tel", type="string", length=45, nullable=true)
      */
     private $tel;
+
+    /**
+     * @var string $postal
+     *
+     * @ORM\Column(name="postal", type="string", length=45, nullable=true)
+     */
+    private $postal;
 
     /**
      * @var string
@@ -88,6 +102,11 @@ class User extends BaseUser{
     */
     protected $consultations;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Ben\DoctorsBundle\Entity\Speciality")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $speciality;
     
     /************ constructeur ************/
     
@@ -102,6 +121,30 @@ class User extends BaseUser{
     
     /************ getters & setters  ************/
 
+
+    /**
+     * Set matricule
+     *
+     * @param string $matricule
+     * @return profile
+     */
+    public function setMatricule($matricule)
+    {
+        $this->matricule = $matricule;
+
+        return $this;
+    }
+
+    /**
+     * Get matricule
+     *
+     * @return string
+     */
+    public function getMatricule()
+    {
+        return $this->matricule;
+    }
+
     /**
      * Get fullname
      *
@@ -109,7 +152,7 @@ class User extends BaseUser{
      */
     public function getFullName()
     {
-        return $this->family_name.' '.$this->first_name;
+        return ucfirst($this->first_name).' '.strtoupper($this->family_name);
     }
 
     /**
@@ -362,6 +405,29 @@ class User extends BaseUser{
     }
 
     /**
+     * Set postal
+     *
+     * @param string $postal
+     * @return profile
+     */
+    public function setPostal($postal)
+    {
+        $this->postal = $postal;
+
+        return $this;
+    }
+
+    /**
+     * Get postal
+     *
+     * @return string
+     */
+    public function getPostal()
+    {
+        return $this->postal;
+    }
+
+    /**
      * Set address
      *
      * @param string $address
@@ -382,6 +448,18 @@ class User extends BaseUser{
     public function getAddress()
     {
         return $this->address;
+    }
+
+    public function setSpeciality(\Ben\DoctorsBundle\Entity\Speciality $speciality)
+    {
+        $this->speciality = $speciality;
+
+        return $this;
+    }
+
+    public function getSpeciality()
+    {
+        return $this->speciality;
     }
 }
 

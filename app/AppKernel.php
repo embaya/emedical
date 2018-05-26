@@ -23,6 +23,7 @@ class AppKernel extends Kernel
             new Ben\UserBundle\BenUserBundle(),
             new Ben\DoctorsBundle\BenDoctorsBundle(),
             new Knp\Bundle\SnappyBundle\KnpSnappyBundle(),
+            new BG\BarcodeBundle\BarcodeBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

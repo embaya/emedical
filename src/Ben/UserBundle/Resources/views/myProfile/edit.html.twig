@@ -17,7 +17,13 @@ Profile - {{ parent() }}
   {{ form_row(form.image.file, { 'label': ' '}) }}
   {{ form_row(form.family_name, { 'label': 'Nom'}) }}
   {{ form_row(form.first_name, { 'label': 'Prénom'}) }}
+  {{ form_row(form.matricule, { 'label': 'Matricule'}) }}
+  {{ form_row(form.speciality, { 'label': 'Specialité'}) }}
   {{ form_row(form.tel, { 'label': 'Tél'}) }}
+  {{ form_row(form.address, { 'label': 'Adresse'}) }}
+  {{ form_row(form.city, { 'label': 'Ville'}) }}
+  {{ form_row(form.postal, { 'label': 'Code Postale'}) }}
+  {{ form_row(form.contry, { 'label': 'Pays'}) }}
   {{ form_rest(form) }}
 
     <div class="form-group">

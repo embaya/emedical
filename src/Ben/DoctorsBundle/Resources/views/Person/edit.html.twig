@@ -3,7 +3,7 @@
 Tableau de bord | {{ parent() }}
 {% endblock %}
 {% block body %}
-<h3><span class="glyphicon glyphicon-user"></span> Inscription d'un nouveau etudiant</h3>
+<h3><span class="glyphicon glyphicon-user"></span> Inscription d'un nouveau Patient</h3>
 <form action="{{ path('person_update', { 'id': entity.id }) }}"  class="form-horizontal col-md-8" method="post">
     {% include "BenDoctorsBundle:Person:form.html.twig" %}
 

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b10f2c7c7ca17d806cc8a8f43df3f098",
+    "content-hash": "bc105279d731aba90990e8658ab2b32f",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -49,6 +49,56 @@
                 "transliterator"
             ],
             "time": "2017-04-04T11:38:05+00:00"
+        },
+        {
+            "name": "bitgrave/barcode-bundle",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/paterik/BGBarcodeBundle.git",
+                "reference": "fd519244b7c5f6f06bdab19c5f304a1c51d82fde"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/paterik/BGBarcodeBundle/zipball/fd519244b7c5f6f06bdab19c5f304a1c51d82fde",
+                "reference": "fd519244b7c5f6f06bdab19c5f304a1c51d82fde",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.5 || ^5.6 || ^7.0",
+                "symfony/framework-bundle": "~2.1|~2.3|~2.7|~2.8|~3.0"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-4": {
+                    "BG\\BarcodeBundle\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GNU-LGPLv3"
+            ],
+            "authors": [
+                {
+                    "name": "BGBarcodeBundle Community",
+                    "homepage": "https://github.com/paterik/BGBarcodeBundle/contributors"
+                },
+                {
+                    "name": "Patrick Paechnatz",
+                    "email": "patrick.paechnatz@gmail.com"
+                }
+            ],
+            "description": "provide barcode rendering service into your Symfony2 application.",
+            "homepage": "https://github.com/paterik/BGBarcodeBundle",
+            "keywords": [
+                "barcode",
+                "barcodes",
+                "datamatrix",
+                "ean",
+                "pdf417",
+                "qrcode"
+            ],
+            "time": "2017-01-24T18:08:33+00:00"
         },
         {
             "name": "doctrine/annotations",

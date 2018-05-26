@@ -6,7 +6,7 @@ Tableau de bord | {{ parent() }}
 <h3><span class="glyphicon glyphicon-tag"></span> {{ entity.isSpecial ? 'Orientation vers une consultation spécialisée' : 'Consultation médicale générale '}}</h3>
 <form action="{{ path('consultation_create', { 'type': entity.type }) }}" class="form-horizontal col-md-8" method="post" {{ form_enctype(form) }}>
     <div class="form-group ">
-		<label class="col-md-6 control-label" for="user">Etudiant</label>
+		<label class="col-md-6 control-label" for="user">Patient</label>
 		<div class="col-md-6">
 			<input id="user" class="form-control disabled" disabled="disabled" type="text" name="unused" value="{{ entity.person.fullName }}">
 		</div>

@@ -6,8 +6,16 @@ services:
         class: Twig_Extensions_Extension_Text
         tags:
         - { name: twig.extension }
+    twig.extension.intl:
+        class: Twig_Extensions_Extension_Intl
+        tags:
+            - { name: twig.extension }
     ben.twig.extension.config:
         class: Ben\DoctorsBundle\Twig\ConfigExtension
         arguments: ["@doctrine.orm.entity_manager"]
+        tags:
+        - { name: twig.extension }
+    ben.twig.age_extension:
+        class: Ben\DoctorsBundle\Twig\TwigExtension
         tags:
         - { name: twig.extension }
