@@ -1,0 +1,31 @@
+<legend>Identité du patient</legend>
+  {{ form_row(form.familyname, { 'label': 'Nom'}) }}
+  {{ form_row(form.firstname, { 'label': 'Prénom'}) }}
+  {{ form_row(form.birthday, { 'label': 'Date de naissance'}) }}
+  {{ form_row(form.birthcity, { 'label': 'Lieu de naissance'}) }}
+  {{ form_row(form.gender, { 'label': 'Sexe'}) }}
+  {{ form_row(form.contry, { 'label': 'Nationalité'}) }}
+  {{ form_row(form.cin, { 'label': 'CIN'}) }}
+  {{ form_row(form.nss, { 'label': 'NSS'}) }}
+
+<legend>Informations générale</legend>
+  {{ form_row(form.address, { 'label': 'Adresse Personnelle'}) }}
+  {{ form_row(form.city, { 'label': 'Ville'}) }}
+  {{ form_row(form.gsm, { 'label': 'GSM'}) }}
+  {{ form_row(form.email, { 'label': 'E-Mail'}) }}
+  {{ form_row(form.nss, { 'label': 'N° de couverture sociale'})  }}
+
+  <legend>Partie handicap</legend>
+  {{ form_row(form.ishandicap, { 'label': 'Handicap ?'}) }}
+  {{ form_row(form.handicap, { 'label': 'Nature de l’handicap'}) }}
+  {{ form_row(form.needs, { 'label': 'Besoins spécifiques'}) }}
+  {{ form_rest(form) }} 
+      
+
+  <script type="text/javascript">
+
+
+      cityData = "Paris_Marseille_Lyon_Nice_Lille_Toulouse_Nante_Montpellier_Toulon_Grenoble_Le Havre_Renne_Toulon_Dijon_Nimes_Tours_Limoge_Annecy_Amiens_Avignon_Creteil".split('_');
+  </script>
+
+  

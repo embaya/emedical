@@ -1,0 +1,33 @@
+Ben\DoctorsBundle\Entity\Person:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: cin
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: nss
+    properties:
+        cin:
+            - NotBlank: ~
+        nss:
+            - NotBlank: ~
+        familyname:
+            - NotBlank: ~
+        firstname:
+            - NotBlank: ~
+        birthday:
+            - NotBlank: ~
+        birthcity:
+            - NotBlank: ~
+        gender:
+            - NotBlank: ~
+        contry:
+            - NotBlank: ~
+        cin:
+            - NotBlank: ~
+        nss:
+            - NotBlank: ~
+        address:
+            - NotBlank: ~
+        city:
+            - NotBlank: ~
+        gsm:
+            - NotBlank: ~
+        email:
+            - NotBlank: ~
