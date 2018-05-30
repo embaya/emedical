@@ -1,0 +1,30 @@
+acte:
+    path:     /
+    defaults: { _controller: "BenDoctorsBundle:Acte:index" }
+
+acte_show:
+    path:     /{id}/show
+    defaults: { _controller: "BenDoctorsBundle:Acte:show" }
+
+acte_new:
+    path:     /new
+    defaults: { _controller: "BenDoctorsBundle:Acte:new" }
+
+acte_create:
+    path:     /create
+    defaults: { _controller: "BenDoctorsBundle:Acte:create" }
+    methods:  POST
+
+acte_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "BenDoctorsBundle:Acte:edit" }
+
+acte_update:
+    path:     /{id}/update
+    defaults: { _controller: "BenDoctorsBundle:Acte:update" }
+    methods:  [POST, PUT]
+
+acte_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "BenDoctorsBundle:Acte:delete" }
+    methods:  [POST, DELETE]

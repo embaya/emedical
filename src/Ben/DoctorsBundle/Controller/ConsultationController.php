@@ -254,7 +254,7 @@ class ConsultationController extends Controller
     }
 
 
-    public function pdfOrdonnanceAction($id)
+    public function generatePdfFileAction($id, $type)
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -267,27 +267,58 @@ class ConsultationController extends Controller
         if(!is_numeric($ena13) || strlen($ena13) != 13)
             $ena13 = '501234567890';
         $bcHTMLRaw = $myBarcode->getBarcodeHTML('501234567890', 'EAN13', 1.75, 45);
-        $html = $this->renderView('BenDoctorsBundle:Consultation:consultaion.html.twig', array(
-             'entity'      => $entity,
-              'barcodeHTML' => $bcHTMLRaw,
-        ));
-        //$pageUrl = $this->generateUrl('homepage', array(), true); // use absolute path!
-        /*return $this->render('BenDoctorsBundle:Consultation:consultaion.html.twig', array(
-            'entity'      => $entity,
-            'barcodeHTML' => $bcHTMLRaw,
-        ));*/
-        $filename = 'ord_'.$id;
-
-        return new Response(
-            $snappy->getOutputFromHtml($html, array(
+        if($type == "ord"){
+            $html = $this->renderView('BenDoctorsBundle:Consultation:consultaion.html.twig', array(
+                'entity'      => $entity,
+                'barcodeHTML' => $bcHTMLRaw,
+            ));
+            $filename = 'ord_'.$id;
+            $options =  array(
                 'page-height' => 64 * 3,
                 'page-width'  => 52 * 3,
-            )),
+            );
+        }else{
+            $html = $this->renderView('BenDoctorsBundle:Consultation:feuille_soins.html.twig', array(
+                'entity'      => $entity,
+            ));
+            $filename = 'soins_'.$id;
+            $options =  array(
+                'margin-top' => 0,
+                'margin-bottom' => 0,
+                'margin-left' => 0,
+                'margin-right' => 0
+            );
+        }
+
+        //$pageUrl = $this->generateUrl('homepage', array(), true); // use absolute path!
+        return $this->render('BenDoctorsBundle:Consultation:feuille_soins.html.twig', array(
+            'entity'      => $entity,
+            'resourceDir' => __DIR__.'../../web/'
+        ));/**/
+
+
+        return new Response(
+            $snappy->getOutputFromHtml($html, $options),
             200,
             array(
                 'Content-Type'          => 'application/pdf',
                 'Content-Disposition'   => 'inline; filename="'.$filename.'.pdf"'
             )
         );
+    }
+    public function fseEditAction($id, $type)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $entity = $em->getRepository('BenDoctorsBundle:Consultation')->find($id);
+
+        $editForm = $this->createForm(new ConsultationType($entity->getType()), $entity);
+        $deleteForm = $this->createDeleteForm($id);
+
+        return $this->render('BenDoctorsBundle:Consultation:edit.html.twig', array(
+            'entity'      => $entity,
+            'form'   => $editForm->createView(),
+            'delete_form' => $deleteForm->createView(),
+        ));
     }
 }

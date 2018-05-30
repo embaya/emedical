@@ -1,0 +1,51 @@
+{% extends "BenDoctorsBundle::layout.html.twig" %}
+{% block title %}
+    Tableau de bord | {{ parent() }}
+{% endblock %}
+{% block body %}
+    <h1>Fse list</h1>
+
+    <table class="records_list">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Dispense_frais</th>
+                <th>Beneficiaire</th>
+                <th>Acte_conditionne</th>
+                <th>Date_demande</th>
+                <th>Montanttotal</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('ben_fse_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.dispensefrais }}</td>
+                <td>{{ entity.beneficiaire }}</td>
+                <td>{{ entity.acteconditionne }}</td>
+                <td>{% if entity.datedemande %}{{ entity.datedemande|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ entity.montantTotal }}</td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('ben_fse_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('ben_fse_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        <ul>
+        <li>
+            <a href="{{ path('ben_fse_new') }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>
+    {% endblock %}

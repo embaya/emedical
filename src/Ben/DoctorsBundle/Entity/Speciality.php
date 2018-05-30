@@ -22,6 +22,13 @@ class Speciality
     private $id;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="numero", type="integer")
+     */
+    private $numero;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
@@ -92,5 +99,29 @@ class Speciality
     public function getDescription()
     {
         return $this->description;
+    }
+
+    /**
+     * Set numero
+     *
+     * @param integer $numero
+     *
+     * @return Speciality
+     */
+    public function setNumero($numero)
+    {
+        $this->numero = $numero;
+
+        return $this;
+    }
+
+    /**
+     * Get numero
+     *
+     * @return integer
+     */
+    public function getNumero()
+    {
+        return $this->numero;
     }
 }

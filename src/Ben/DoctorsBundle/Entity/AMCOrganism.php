@@ -5,12 +5,12 @@ namespace Ben\DoctorsBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Speciality
+ * AMCOrganism
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="Ben\DoctorsBundle\Entity\SpecialityRepository")
+ * @ORM\Entity
  */
-class Speciality
+class AMCOrganism
 {
     /**
      * @var integer
@@ -22,13 +22,6 @@ class Speciality
     private $id;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="numero", type="integer")
-     */
-    private $numero;
-
-    /**
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
@@ -38,10 +31,9 @@ class Speciality
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="string", length=755)
+     * @ORM\Column(name="code_amc", type="string", length=255, nullable=true)
      */
-    private $description;
-
+    private $code_amc;
 
     /**
      * Get id
@@ -52,13 +44,23 @@ class Speciality
     {
         return $this->id;
     }
+    /**
+     * Get Name
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->getName();
+    }
+
 
     /**
      * Set name
      *
      * @param string $name
      *
-     * @return Speciality
+     * @return AMCOrganism
      */
     public function setName($name)
     {
@@ -76,28 +78,5 @@ class Speciality
     {
         return $this->name;
     }
-
-    /**
-     * Set description
-     *
-     * @param string $description
-     *
-     * @return Speciality
-     */
-    public function setDescription($description)
-    {
-        $this->description = $description;
-
-        return $this;
-    }
-
-    /**
-     * Get description
-     *
-     * @return string
-     */
-    public function getDescription()
-    {
-        return $this->description;
-    }
 }
+

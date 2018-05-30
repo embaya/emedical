@@ -6,6 +6,7 @@
 {% set testMenu = ['test','test_elegible','test_show','test_new','test_edit'] %} 
 {% set configMenu = ['config'] %} 
 {% set userMenu = ['ben_users','ben_show_user','ben_new_user','ben_edit_user'] %} 
+{% set fseMenu = ['ben_fse_show','ben_fse_new','ben_fse_edit','ben_fse_create'] %}
 
 
 <nav id="adminmenu">
@@ -15,7 +16,8 @@
         <li class="{% if route not in personMenu %}not-{% endif %}current"><a href="{{ path('person') }}"><span class="glyphicon glyphicon-user block"></span> <span class="menu-title">Patients</span></a>
         </li>
         <li class="{% if route not in consultationMenu %}not-{% endif %}current"><a href="{{ path('consultation') }}"><span class="glyphicon glyphicon-list-alt block"></span> <span class="menu-title">Consultations</span></a></li>
-        <li class="{% if route not in testMenu %}not-{% endif %}current"><a href="{{ path('test') }}"><span class="glyphicon glyphicon-file block"></span> <span class="menu-title">Examens</span></a></li>
+        {#<li class="{% if route not in testMenu %}not-{% endif %}current"><a href="{{ path('test') }}"><span class="glyphicon glyphicon-file block"></span> <span class="menu-title">Examens</span></a></li>#}
+        <li class="{% if route not in fseMenu %}not-{% endif %}current"><a href="{{ path('ben_fse') }}"><span class="glyphicon glyphicon-file block"></span> <span class="menu-title">Feuille de soins</span></a></li>
         {% endif %}
         {% if is_granted("ROLE_MANAGER") %}
         <li class="{% if route not in medsMenu %}not-{% endif %}current"><a href="{{ path('meds') }}"><span class="glyphicon glyphicon-leaf block"></span> <span class="menu-title">Medicaments</span></a></li>

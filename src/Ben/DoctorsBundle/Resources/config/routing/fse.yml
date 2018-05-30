@@ -1,0 +1,30 @@
+ben_fse:
+    path:     /
+    defaults: { _controller: "BenDoctorsBundle:Fse:index" }
+
+ben_fse_show:
+    path:     /{id}/show
+    defaults: { _controller: "BenDoctorsBundle:Fse:show" }
+
+ben_fse_new:
+    path:     /new
+    defaults: { _controller: "BenDoctorsBundle:Fse:new" }
+
+ben_fse_create:
+    path:     /create
+    defaults: { _controller: "BenDoctorsBundle:Fse:create" }
+    methods:  POST
+
+ben_fse_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "BenDoctorsBundle:Fse:edit" }
+
+ben_fse_update:
+    path:     /{id}/update
+    defaults: { _controller: "BenDoctorsBundle:Fse:update" }
+    methods:  [POST, PUT]
+
+ben_fse_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "BenDoctorsBundle:Fse:delete" }
+    methods:  [POST, DELETE]

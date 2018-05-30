@@ -150,7 +150,14 @@ class Person
     * @ORM\OneToMany(targetEntity="Ben\DoctorsBundle\Entity\Consultation", mappedBy="person", cascade={"remove", "persist"})
     */
     protected $consultations;
-    
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Ben\DoctorsBundle\Entity\AMCOrganism")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $assureur;
+
+
     /************ constructeur ************/
     
     public function __construct()

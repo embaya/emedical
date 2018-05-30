@@ -17,8 +17,22 @@
     <link href="{{ absolute_url(asset('css/main.css')) }}" rel="stylesheet">
     <link href="{{ absolute_url(asset('css/select2.css')) }}" rel="stylesheet">-->
     <style>{{ app_config.app_css }}</style>
+    <style>
+        .main_container{
+            background: url({{ absolute_url(asset('images/FSP_CERFA_12541_02-1.jpg')) }}) 0 0;
+            padding-top: 0px;
+            padding-left: 0px;
+            /*z-index: 99;*/
+            background-size: cover;
+            min-width:100%; /*652px;*/
+            min-height: 100%;/*975px;*/
+            position: relative;/**/
+            background-repeat: no-repeat;
+            /*background-position: center;*/
+
+        }    </style>
 </head>
-<body>
+<body class="main_container">
 <div class="container-fluid">
     </br></br>
     <div class="row">
@@ -32,7 +46,7 @@
             Fax : {{ app_config.app_fax }}<br/>
         </div>
         <div class="col-xs-6 pull-right">
-            {{ barcodeHTML|raw }}
+
         </div>
     </div>
     <div class="row">

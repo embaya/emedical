@@ -5,8 +5,9 @@ namespace Ben\DoctorsBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Ben\DoctorsBundle\Entity\AbstractActe;
 
-class SpecialityType extends AbstractType
+class MaladieType extends AbstractActe
 {
     /**
      * @param FormBuilderInterface $builder
@@ -14,10 +15,10 @@ class SpecialityType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        parent::buildForm($builder, $options);
         $builder
-            ->add('name')
-            ->add('numero')
-            ->add('description')
+            ->add('nom')
+            ->add('causeAccident')
         ;
     }
     
@@ -27,7 +28,7 @@ class SpecialityType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Ben\DoctorsBundle\Entity\Speciality'
+            'data_class' => 'Ben\DoctorsBundle\Entity\Maladie'
         ));
     }
 
@@ -36,6 +37,6 @@ class SpecialityType extends AbstractType
      */
     public function getName()
     {
-        return 'ben_doctorsbundle_speciality';
+        return 'ben_doctorsbundle_maladie';
     }
 }

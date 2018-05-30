@@ -1,0 +1,50 @@
+{% extends "BenDoctorsBundle::layout.html.twig" %}
+{% block title %}
+    Tableau de bord | {{ parent() }}
+{% endblock %}
+{% block body %}
+    <h1>Fse</h1>
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Dispense_frais</th>
+                <td>{{ entity.dispensefrais }}</td>
+            </tr>
+            <tr>
+                <th>Beneficiaire</th>
+                <td>{{ entity.beneficiaire }}</td>
+            </tr>
+            <tr>
+                <th>Acte_conditionne</th>
+                <td>{{ entity.acteconditionne }}</td>
+            </tr>
+            <tr>
+                <th>Date_demande</th>
+                <td>{{ entity.datedemande|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Montanttotal</th>
+                <td>{{ entity.montantTotal }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('fse') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('ben_fse_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

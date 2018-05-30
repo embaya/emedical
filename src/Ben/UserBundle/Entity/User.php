@@ -11,7 +11,8 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Table(name="user")
  * @ORM\HasLifecycleCallbacks
  */
-class User extends BaseUser{
+class User extends BaseUser
+{
 
     /**
      * @ORM\Id
@@ -91,15 +92,15 @@ class User extends BaseUser{
      * @Gedmo\Timestampable(on="create")
      */
     protected $lastActivity;
-    
+
     /**
-    * @ORM\OneToOne(targetEntity="Ben\DoctorsBundle\Entity\image", cascade={"remove", "persist"})
-    */
+     * @ORM\OneToOne(targetEntity="Ben\DoctorsBundle\Entity\image", cascade={"remove", "persist"})
+     */
     private $image;
 
     /**
-    * @ORM\OneToMany(targetEntity="Ben\DoctorsBundle\Entity\Consultation", mappedBy="user", cascade={"remove", "persist"})
-    */
+     * @ORM\OneToMany(targetEntity="Ben\DoctorsBundle\Entity\Consultation", mappedBy="user", cascade={"remove", "persist"})
+     */
     protected $consultations;
 
     /**
@@ -107,18 +108,28 @@ class User extends BaseUser{
      * @ORM\JoinColumn(nullable=false)
      */
     private $speciality;
-    
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Ben\DoctorsBundle\Entity\Etablissement", mappedBy="user", cascade={"remove", "persist"})
+     */
+    protected $etablissements;
+
+    /**
+     * @ORM\OneToOne(targetEntity="Ben\DoctorsBundle\Entity\image", cascade={"remove", "persist"})
+     */
+    private $cachet;
+
     /************ constructeur ************/
-    
+
     public function __construct()
     {
         parent::__construct();
         $this->created = new \DateTime;
         $this->lastActivity = new \DateTime;
-        $this->image= new \Ben\DoctorsBundle\Entity\image();
+        $this->image = new \Ben\DoctorsBundle\Entity\image();
         $this->consultations = new \Doctrine\Common\Collections\ArrayCollection();
     }
-    
+
     /************ getters & setters  ************/
 
 
@@ -148,11 +159,11 @@ class User extends BaseUser{
     /**
      * Get fullname
      *
-     * @return string 
+     * @return string
      */
     public function getFullName()
     {
-        return ucfirst($this->first_name).' '.strtoupper($this->family_name);
+        return ucfirst($this->first_name) . ' ' . strtoupper($this->family_name);
     }
 
     /**
@@ -164,14 +175,14 @@ class User extends BaseUser{
     public function setFamilyName($familyName)
     {
         $this->family_name = $familyName;
-    
+
         return $this;
     }
 
     /**
      * Get family_name
      *
-     * @return string 
+     * @return string
      */
     public function getFamilyName()
     {
@@ -187,14 +198,14 @@ class User extends BaseUser{
     public function setFirstName($firstName)
     {
         $this->first_name = $firstName;
-    
+
         return $this;
     }
 
     /**
      * Get first_name
      *
-     * @return string 
+     * @return string
      */
     public function getFirstName()
     {
@@ -210,14 +221,14 @@ class User extends BaseUser{
     public function setTel($tel)
     {
         $this->tel = $tel;
-    
+
         return $this;
     }
 
     /**
      * Get tel
      *
-     * @return string 
+     * @return string
      */
     public function getTel()
     {
@@ -230,7 +241,8 @@ class User extends BaseUser{
      * @param \DateTime $created
      * @return User
      */
-    public function setCreated($created) {
+    public function setCreated($created)
+    {
         $this->created = $created;
 
         return $this;
@@ -239,9 +251,10 @@ class User extends BaseUser{
     /**
      * Get created
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
-    public function getCreated() {
+    public function getCreated()
+    {
         return $this->created;
     }
 
@@ -251,7 +264,8 @@ class User extends BaseUser{
      * @param \DateTime $lastActivity
      * @return User
      */
-    public function setLastActivity($lastActivity) {
+    public function setLastActivity($lastActivity)
+    {
         $this->lastActivity = $lastActivity;
 
         return $this;
@@ -260,9 +274,10 @@ class User extends BaseUser{
     /**
      * Get lastActivity
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
-    public function getLastActivity() {
+    public function getLastActivity()
+    {
         return $this->lastActivity;
     }
 
@@ -272,7 +287,8 @@ class User extends BaseUser{
      * @param \DateTime $lastActivity
      * @return User
      */
-    public function isActiveNow() {
+    public function isActiveNow()
+    {
         $this->lastActivity = new \DateTime();
 
         return $this;
@@ -287,14 +303,14 @@ class User extends BaseUser{
     public function setImage(\Ben\DoctorsBundle\Entity\image $image = null)
     {
         $this->image = $image;
-    
+
         return $this;
     }
 
     /**
      * Get image
      *
-     * @return \Ben\DoctorsBundle\Entity\image 
+     * @return \Ben\DoctorsBundle\Entity\image
      */
     public function getImage()
     {
@@ -304,9 +320,10 @@ class User extends BaseUser{
     /**
      * Get avatar
      *
-     * @return string 
+     * @return string
      */
-    public function getAvatar() {
+    public function getAvatar()
+    {
 
         return $this->image->getWebPath();
     }
@@ -314,12 +331,12 @@ class User extends BaseUser{
     /**
      * Get the most significant role
      *
-     * @return string 
+     * @return string
      */
     public function getRole()
     {
-        if(in_array('ROLE_ADMIN', $this->roles)) $role = 'Administrateur';
-        else if(in_array('ROLE_MANAGER', $this->roles)) $role = 'Manager';
+        if (in_array('ROLE_ADMIN', $this->roles)) $role = 'Administrateur';
+        else if (in_array('ROLE_MANAGER', $this->roles)) $role = 'Manager';
         else $role = 'utilisateur';
         return $role;
     }
@@ -351,7 +368,7 @@ class User extends BaseUser{
     /**
      * Get consultations
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getConsultations()
     {
@@ -460,6 +477,40 @@ class User extends BaseUser{
     public function getSpeciality()
     {
         return $this->speciality;
+    }
+
+    /**
+     * Set cachet
+     *
+     * @param \Ben\DoctorsBundle\Entity\image $cachet
+     * @return profile
+     */
+    public function setCachet(\Ben\DoctorsBundle\Entity\image $cachet = null)
+    {
+        $this->cachet = $cachet;
+
+        return $this;
+    }
+
+    /**
+     * Get cachet
+     *
+     * @return \Ben\DoctorsBundle\Entity\image
+     */
+    public function getCachet()
+    {
+        return $this->cachet;
+    }
+
+    /**
+     * Get etabCachet
+     *
+     * @return string
+     */
+    public function getEtabCachet()
+    {
+
+        return $this->cachet->getWebPath();
     }
 }
 

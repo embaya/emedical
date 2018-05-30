@@ -40,5 +40,9 @@ consultation_remove:
     requirements: { _method: post|delete }
 
 consultation_show_pdf:
-    path:     /{id}/show_pdf
-    defaults: { _controller: "BenDoctorsBundle:Consultation:pdfOrdonnance" }
+    path:     /{id}/show_pdf/{type}
+    defaults: { _controller: "BenDoctorsBundle:Consultation:generatePdfFile" }
+
+fse_edit:
+    path:     /fse/{id}/edit
+    defaults: { _controller: "BenDoctorsBundle:Consultation:fseEdit" }
