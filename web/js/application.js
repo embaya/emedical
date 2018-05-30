@@ -83,6 +83,9 @@ function confirmation() {
         // Get the ul that holds the collection of tags
         $collectionHolder = $('ul.actes');
 
+        $collectionHolder.find('li').each(function() {
+            addTagFormDeleteLink($(this));
+        });
         // add the "add a tag" anchor and li to the tags ul
         $collectionHolder.append($newLinkLi);
 
@@ -133,8 +136,54 @@ function confirmation() {
 
         // Display the form in the page in an li, before the "Add a tag" link li
         var $newFormLi = $('<li></li>').append(newForm);
+        //update_form_inputs();
+        console.log($newFormLi);
         $newLinkLi.before($newFormLi);
+        addTagFormDeleteLink($newFormLi);
     }
 
+    function update_form_inputs(el){
+        var form_name = el.value;
+        var $this = $(el);
+        var parts = $this.attr('name').split(/[[\]]{1,2}/);
+        var select_name = jQuery.grep(parts, function(n){ return (n); });
+        var el_name = select_name.pop();
+        var $this_id = $this.attr('id') + '_dynamic_' + el_name;
+        console.log(); // ["recipe","0","recipe_photo",""]
+        // console.log($this_id);
+        var data = {};
+        var action = Routing.generate('ben_fse_get_from');
+        data['form_get_type'] = form_name;
+        $.ajax({
+            url: action,
+            type: 'POST',
+            data: data,
+            success: function (html) {
+                if ($('#' + $this_id).length == 0) {
+                    $('<div style="margin-top:10px" id ="'+$this_id+'"></div>').insertAfter($this);
+                }
+                $('#' + $this_id).empty().html(html);
+            }
+        });
+    }
+
+    function addTagFormDeleteLink($tagFormLi) {
+        var $removeFormA = $('<a href="#">Supprimer acte</a>');
+        $tagFormLi.append($removeFormA);
+
+        $removeFormA.on('click', function(e) {
+            // prevent the link from creating a "#" on the URL
+            e.preventDefault();
+
+            // remove the li for the tag form
+            $tagFormLi.remove();
+        });
+    }
+
+    (function ($) {
+        $(document).on("change", 'select[id^="ben_doctorsbundle_fse_actes"]', function () {
+            update_form_inputs(this);
+        });
+    })(jQuery);
 
 })(jQuery);

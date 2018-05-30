@@ -291,10 +291,10 @@ class ConsultationController extends Controller
         }
 
         //$pageUrl = $this->generateUrl('homepage', array(), true); // use absolute path!
-        return $this->render('BenDoctorsBundle:Consultation:feuille_soins.html.twig', array(
-            'entity'      => $entity,
-            'resourceDir' => __DIR__.'../../web/'
-        ));/**/
+        /* return $this->render('BenDoctorsBundle:Consultation:feuille_soins.html.twig', array(
+             'entity'      => $entity,
+             'resourceDir' => __DIR__.'../../web/'
+         ));*/
 
 
         return new Response(

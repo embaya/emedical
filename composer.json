@@ -16,6 +16,7 @@
     "bitgrave/barcode-bundle": "^1.0",
     "doctrine/doctrine-bundle": "~1.4",
     "doctrine/orm": "^2.4.8",
+    "friendsofsymfony/jsrouting-bundle": "^2.2",
     "friendsofsymfony/user-bundle": "~2.0@dev",
     "gedmo/doctrine-extensions": "dev-master",
     "incenteev/composer-parameter-handler": "~2.0",

@@ -63,8 +63,13 @@ class Fse
      * @ORM\ManyToOne(targetEntity="Ben\DoctorsBundle\Entity\Acte")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $acte;
+    private $actes;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Ben\DoctorsBundle\Entity\RegimePaiement")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $regimePaiement;
     /**
      * @var boolean
      *
@@ -343,27 +348,27 @@ class Fse
     }
 
     /**
-     * Set acte
+     * Set actes
      *
      * @param \Ben\DoctorsBundle\Entity\Acte $acte
      *
      * @return Fse
      */
-    public function setActe(\Ben\DoctorsBundle\Entity\Acte $acte)
+    public function setActe(\Ben\DoctorsBundle\Entity\Acte $actes)
     {
-        $this->acte = $acte;
+        $this->actes = $actes;
 
         return $this;
     }
 
     /**
-     * Get acte
+     * Get actes
      *
      * @return \Ben\DoctorsBundle\Entity\Acte
      */
-    public function getActe()
+    public function getActes()
     {
-        return $this->acte;
+        return $this->actes;
     }
 
     /**

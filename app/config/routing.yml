@@ -4,3 +4,5 @@ ben_doctors:
 ben_user:
     resource: "@BenUserBundle/Resources/config/routing.yml"
     prefix:   /
+fos_js_routing:
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"

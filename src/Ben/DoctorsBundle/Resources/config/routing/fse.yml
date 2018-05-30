@@ -6,6 +6,11 @@ ben_fse_show:
     path:     /{id}/show
     defaults: { _controller: "BenDoctorsBundle:Fse:show" }
 
+ben_fse_get_from:
+    path:     /getform
+    defaults: { _controller: "BenDoctorsBundle:Fse:getForm" }
+    options:
+        expose: true
 ben_fse_new:
     path:     /new
     defaults: { _controller: "BenDoctorsBundle:Fse:new" }
@@ -28,3 +33,8 @@ ben_fse_delete:
     path:     /{id}/delete
     defaults: { _controller: "BenDoctorsBundle:Fse:delete" }
     methods:  [POST, DELETE]
+
+ben_fse_ajax:
+    path:     /ajaxFselist
+    defaults: { _controller: "BenDoctorsBundle:Fse:ajaxList" }
+    requirements: { _method: post }

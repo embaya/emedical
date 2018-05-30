@@ -5,7 +5,41 @@
 {% block body %}
     <div class="col-md-12">
         <h3><span class="glyphicon glyphicon-user"></span> Nouvelle feuile de soins</h3>
+        <legend>Partie administrative</legend>
+        <div class="col-md-12">
+            <table class="table table-striped table-hover table-bordered">
+                <tbody>
+                {#% if entity.isSpecial %}
+                    <tr>
+                        <th>Infrastructure sanitaire de reference</th>
+                        <td>{{ entity.infrastructure }}</td>
+                    </tr>
+                    <tr>
+                        <th>Specialité</th>
+                        <td>{{ entity.name }}</td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <th>Motif</th>
+                        <td>{{ entity.name }}</td>
+                    </tr>
+                {% endif %
+                <tr>
+                    <th>N° Finess</th>
+                    <td>{{ app.user.etablissement.numFiness }}</td>
+                </tr>#}
 
+                <tr>
+                    <th>Medecin</th>
+                    <td>{{ app.user.fullname }}</td>
+                </tr>
+                <tr>
+                    <th>Spécialité : </th>
+                    <td>{{  app.user.speciality.name }} ({{  app.user.speciality.numero }})</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
         <form action="{{ path('ben_fse_create') }}"  class="form-horizontal col-md-8" method="post">
 
             {% include "BenDoctorsBundle:Fse:form.html.twig" %}

@@ -53,6 +53,11 @@ class DepacementNGAP
         return $this->id;
     }
 
+    function __toString()
+    {
+        return $this->getLibelle();
+    }
+
     /**
      * Set code
      *

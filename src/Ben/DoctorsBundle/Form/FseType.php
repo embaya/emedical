@@ -53,7 +53,17 @@ class FseType extends AbstractType
                 'required'  => false,
             ))
             ->add('amc_organism')
-//            ->add('montantTotal')
+            ->add('regime_paiement', 'entity', array(
+                // looks for choices from this entity
+                'class' => 'BenDoctorsBundle:RegimePaiement',
+
+                // uses the User.username property as the visible option string
+                //'choice_label' => 'username',
+
+                // used to render a select box, check boxes or radios
+                // 'multiple' => true,
+                // 'expanded' => true,
+            ))
 //            ->add('medecin')
            // ->add('acte')
             ->add('actes','collection',array(

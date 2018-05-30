@@ -2,11 +2,18 @@
 
 namespace Ben\DoctorsBundle\Controller;
 
+use Ben\DoctorsBundle\Entity\AbstractActe;
+use Ben\DoctorsBundle\Form\ATMPType;
+use Ben\DoctorsBundle\Form\MaladieType;
+use Ben\DoctorsBundle\Form\MaterniteType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Ben\DoctorsBundle\Entity\Fse;
 use Ben\DoctorsBundle\Form\FseType;
+use Ben\DoctorsBundle\Form\ActeNGAPType;
+use Ben\DoctorsBundle\Form\ActeCCAMType;
+use JMS\SecurityExtraBundle\Annotation\Secure;
 
 /**
  * Fse controller.
@@ -23,12 +30,28 @@ class FseController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('BenDoctorsBundle:Fse')->findAll();
+        $entitiesLength = $em->getRepository('BenDoctorsBundle:Fse')->counter();
 
         return $this->render('BenDoctorsBundle:Fse:index.html.twig', array(
+            'entitiesLength' => $entitiesLength));
+    }
+
+    /**
+     * Fse list using ajax
+     * @Secure(roles="ROLE_MANAGER")
+     */
+    public function ajaxListAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $searchParam = $request->get('searchParam');
+        $entities = $em->getRepository('BenDoctorsBundle:Fse')->search($searchParam);
+        $pagination = (new Paginator())->setItems(count($entities), $searchParam['perPage'])->setPage($searchParam['page'])->toArray();
+        return $this->render('BenDoctorsBundle:Fse:ajax_list.html.twig', array(
             'entities' => $entities,
+            'pagination' => $pagination,
         ));
     }
+
     /**
      * Creates a new Fse entity.
      *
@@ -49,7 +72,7 @@ class FseController extends Controller
 
         return $this->render('BenDoctorsBundle:Fse:new.html.twig', array(
             'entity' => $entity,
-            'form'   => $form->createView(),
+            'form' => $form->createView(),
         ));
     }
 
@@ -79,11 +102,10 @@ class FseController extends Controller
     public function newAction()
     {
         $entity = new Fse();
-        $form   = $this->createCreateForm($entity);
-
+        $form = $this->createCreateForm($entity);
         return $this->render('BenDoctorsBundle:Fse:new.html.twig', array(
             'entity' => $entity,
-            'form'   => $form->createView(),
+            'form' => $form->createView(),
         ));
     }
 
@@ -104,7 +126,7 @@ class FseController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return $this->render('BenDoctorsBundle:Fse:show.html.twig', array(
-            'entity'      => $entity,
+            'entity' => $entity,
             'delete_form' => $deleteForm->createView(),
         ));
     }
@@ -127,19 +149,19 @@ class FseController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return $this->render('BenDoctorsBundle:Fse:edit.html.twig', array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'entity' => $entity,
+            'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
     }
 
     /**
-    * Creates a form to edit a Fse entity.
-    *
-    * @param Fse $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
+     * Creates a form to edit a Fse entity.
+     *
+     * @param Fse $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
     private function createEditForm(Fse $entity)
     {
         $form = $this->createForm(new FseType(), $entity, array(
@@ -151,6 +173,7 @@ class FseController extends Controller
 
         return $form;
     }
+
     /**
      * Edits an existing Fse entity.
      *
@@ -176,11 +199,12 @@ class FseController extends Controller
         }
 
         return $this->render('BenDoctorsBundle:Fse:edit.html.twig', array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'entity' => $entity,
+            'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
     }
+
     /**
      * Deletes a Fse entity.
      *
@@ -218,7 +242,27 @@ class FseController extends Controller
             ->setAction($this->generateUrl('ben_fse_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
-            ->getForm()
-        ;
+            ->getForm();
+    }
+
+
+    function getFormAction(Request $request)
+    {
+        $types = [
+            'actengap' => new ActeNGAPType(),
+            'acteccam' => new ActeCCAMType(),
+            'maternite' => new MaterniteType(),
+            'maladie' => new MaladieType(),
+            'atmp' => new ATMPType(),
+        ];
+
+        $formName = $request->request->get('form_get_type');
+//        $formName= AbstractActe::getTypeName($formName);
+       // $formType= $formName.'Type';
+       // dump($types[$formName]);
+        $form = $this->createForm($types[$formName]);
+        return $this->render('BenDoctorsBundle:Fse:generic_form.html.twig', array(
+            'form' => $form->createView(),
+        ));
     }
 }

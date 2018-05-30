@@ -24,6 +24,7 @@ class AppKernel extends Kernel
             new Ben\DoctorsBundle\BenDoctorsBundle(),
             new Knp\Bundle\SnappyBundle\KnpSnappyBundle(),
             new BG\BarcodeBundle\BarcodeBundle(),
+            new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

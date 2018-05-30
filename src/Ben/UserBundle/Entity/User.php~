@@ -513,28 +513,6 @@ class User extends BaseUser
 
         return $this->cachet->getWebPath();
     }
-
-    /**
-     * Set etablissement
-     *
-     * @param \Ben\DoctorsBundle\Entity\Etablissement $etablissement
-     *
-     * @return User
-     */
-    public function setEtablissement(\Ben\DoctorsBundle\Entity\Etablissement $etablissement)
-    {
-        $this->etablissement = $etablissement;
-
-        return $this;
-    }
-
-    /**
-     * Get etablissement
-     *
-     * @return \Ben\DoctorsBundle\Entity\Etablissement
-     */
-    public function getEtablissement()
-    {
-        return $this->etablissement;
-    }
 }
+
+?>

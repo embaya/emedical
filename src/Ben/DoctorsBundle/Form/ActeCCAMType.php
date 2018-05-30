@@ -3,12 +3,10 @@
 namespace Ben\DoctorsBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
-use Ben\DoctorsBundle\Form\RaisonMedicaleType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Ben\DoctorsBundle\Entity\AbstractActe;
 
-class MaladieType extends AbstractType
+class ActeCCAMType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -16,10 +14,14 @@ class MaladieType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        //parent::buildForm($builder, $options);
         $builder
-            ->add('nom')
-            ->add('causeAccident')
+            ->add('code')
+            ->add('libelle')
+            ->add('tarifBase')
+            ->add('codeAssociation')
+            ->add('codeModificateur')
+            ->add('codeCondition')
+            ->add('codeActivite')
         ;
     }
     
@@ -29,7 +31,7 @@ class MaladieType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Ben\DoctorsBundle\Entity\Maladie'
+            'data_class' => 'Ben\DoctorsBundle\Entity\ActeCCAM'
         ));
     }
 
@@ -38,6 +40,6 @@ class MaladieType extends AbstractType
      */
     public function getName()
     {
-        return 'ben_doctorsbundle_maladie';
+        return 'ben_doctorsbundle_acteccam';
     }
 }

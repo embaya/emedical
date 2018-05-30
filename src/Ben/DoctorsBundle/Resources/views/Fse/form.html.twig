@@ -7,7 +7,7 @@
   {{ form_row(form.consultation, { 'label': 'Consultation'}) }}
   {{ form_row(form.dispense_frais, { 'label': 'Dispense de frais'}) }}
  {{ form_row(form.amc_organism, { 'label': 'Organisme AMC'}) }}
-
+{{ form_row(form.regime_paiement, { 'label': 'Régime Paiement'}) }}
 
 <legend>Actes</legend>
 <ul class="actes" data-prototype="{{ form_widget(form.actes.vars.prototype)|e('html_attr') }}">
@@ -29,27 +29,7 @@
   {{ form_rest(form) }} #}
 
 <script type="text/javascript">
-    (function ($) {
-        $(document).on("change", "select#ben_doctorsbundle_fse_actes_0_actetype", function () {
-            alert(this.value);
-            var data = {};
-            data['form_actes_type'] = this.value;
-            // Submit data via AJAX to the form's action path.
-            $.ajax({
-                url: $form.attr('action'),
-                type: $form.attr('method'),
-                data: data,
-                success: function (html) {
-                    // Replace current position field ...
-                    $('#user_vehicle_vehicle_model').replaceWith(
-                        // ... with the returned one from the AJAX response.
-                        $(html).find('#user_vehicle_vehicle_model')
-                    );
-                    // Position field now displays the appropriate positions.
-                }
-            });
-        });
-    })(jQuery);
+
 </script>
 
   

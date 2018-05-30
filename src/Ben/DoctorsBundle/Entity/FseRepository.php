@@ -10,4 +10,8 @@ namespace Ben\DoctorsBundle\Entity;
  */
 class FseRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function counter() {
+        $qb = $this->createQueryBuilder('m')->select('COUNT(m)');
+        return $qb->getQuery()->getSingleScalarResult();
+    }
 }

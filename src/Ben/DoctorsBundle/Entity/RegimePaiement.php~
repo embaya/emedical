@@ -46,11 +46,6 @@ class RegimePaiement
         return $this->id;
     }
 
-    public function __toString()
-    {
-        return 'AMO '.$this->amo . ' -  AMC ' . $this->amc;
-    }
-
     /**
      * Set amo
      *

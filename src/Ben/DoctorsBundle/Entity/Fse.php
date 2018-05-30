@@ -66,6 +66,11 @@ class Fse
     private $actes;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Ben\DoctorsBundle\Entity\RegimePaiement")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $regimePaiement;
+    /**
      * @var boolean
      *
      * @ORM\Column(name="acte_conditionne", type="boolean")
@@ -388,5 +393,43 @@ class Fse
     public function getDateNaissance()
     {
         return $this->date_naissance;
+    }
+
+    /**
+     * Set actes
+     *
+     * @param \Ben\DoctorsBundle\Entity\Acte $actes
+     *
+     * @return Fse
+     */
+    public function setActes(\Ben\DoctorsBundle\Entity\Acte $actes)
+    {
+        $this->actes = $actes;
+
+        return $this;
+    }
+
+    /**
+     * Set regimePaiement
+     *
+     * @param \Ben\DoctorsBundle\Entity\RegimePaiement $regimePaiement
+     *
+     * @return Fse
+     */
+    public function setRegimePaiement(\Ben\DoctorsBundle\Entity\RegimePaiement $regimePaiement)
+    {
+        $this->regimePaiement = $regimePaiement;
+
+        return $this;
+    }
+
+    /**
+     * Get regimePaiement
+     *
+     * @return \Ben\DoctorsBundle\Entity\RegimePaiement
+     */
+    public function getRegimePaiement()
+    {
+        return $this->regimePaiement;
     }
 }
